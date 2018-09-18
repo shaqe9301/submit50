@@ -17,6 +17,9 @@ import termcolor
 
 from . import __version__
 
+CONFIG_LOADER = lib50.config.Loader("submit50")
+CONFIG_LOADER.scope("files", "include", "exclude", "require")
+
 # Internationalization
 gettext.install("submit50", pkg_resources.resource_filename("submit50", "locale"))
 
@@ -143,7 +146,7 @@ def main():
     check_announcements()
     check_version()
 
-    lib50.push("submit50", args.slug, prompt=prompt)
+    lib50.push("submit50", args.slug, CONFIG_LOADER, prompt=prompt)
 
 
 if __name__ == "__main__":
